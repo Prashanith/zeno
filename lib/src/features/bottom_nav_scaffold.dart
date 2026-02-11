@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'about/about_us.dart';
-import 'cron/create_schedule.dart';
-import 'cron/upcoming_schedules.dart';
-import 'cron/scheduled_tasks.dart';
+import 'package:zeno/src/features/tasks/create_task.dart';
+import 'package:zeno/src/features/tasks/tasks.dart';
+import 'package:zeno/src/features/tasks/upcoming_tasks.dart';
+
 import '../widgets/logo.dart';
+import 'about/about_us.dart';
 
 class BottomNavScaffold extends StatefulWidget {
   const BottomNavScaffold({super.key});
@@ -18,9 +19,9 @@ class _BottomNavScaffoldState extends State<BottomNavScaffold> {
   Widget getWidget(int i) {
     switch (i) {
       case 0:
-        return ScheduledTasks();
+        return Tasks();
       case 1:
-        return UpcomingSchedules();
+        return UpcomingTasks();
       case 2:
         return AboutUs();
       default:
@@ -31,7 +32,7 @@ class _BottomNavScaffoldState extends State<BottomNavScaffold> {
   String getTitle(int i) {
     switch (i) {
       case 0:
-        return 'Scheduled Tasks';
+        return 'Tasks';
       case 1:
         return 'Upcoming Schedules';
       case 2:
@@ -66,7 +67,7 @@ class _BottomNavScaffoldState extends State<BottomNavScaffold> {
                 ),
                 isScrollControlled: true,
                 context: context,
-                builder: (context) => CreateSchedule(),
+                builder: (context) => CreateTask(),
               ),
             ),
       bottomNavigationBar: Container(

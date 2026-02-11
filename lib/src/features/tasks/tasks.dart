@@ -1,36 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../utils/cron_summary.dart';
-import 'models/scheduled_task.dart';
+import 'models/task.dart';
 import 'services/schedule_task_service.dart';
 
-class ScheduledTasks extends StatefulWidget {
-  const ScheduledTasks({super.key});
+class Tasks extends StatefulWidget {
+  const Tasks({super.key});
 
   @override
-  State<ScheduledTasks> createState() => _ScheduledTasksState();
+  State<Tasks> createState() => _TasksState();
 }
 
-class _ScheduledTasksState extends State<ScheduledTasks> {
-  late List<ScheduledTask> scheduledTasks = [];
-  Future<List<ScheduledTask>> _future = Future.delayed(
-    Duration(seconds: 0),
-    () => [],
-  );
+class _TasksState extends State<Tasks> {
+  late List<Task> scheduledTasks = [];
+  Future<List<Task>> _future = Future.delayed(Duration(seconds: 0), () => []);
 
-  String getText(CronDescriptionResult? result) {
-    if (result != null) {
-      if (result.errorMessage != null) {
-        return result.errorMessage!;
-      }
-      if (result.outputMessage != null) {
-        return result.outputMessage!;
-      }
-    }
-    return '';
-  }
-
-  Future<List<ScheduledTask>> fetchData() async {
+  Future<List<Task>> fetchData() async {
     var list = await ScheduledTaskService.getAllTasks();
     return list;
   }
@@ -49,7 +33,7 @@ class _ScheduledTasksState extends State<ScheduledTasks> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<ScheduledTask>>(
+    return FutureBuilder<List<Task>>(
       future: _future,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -113,16 +97,8 @@ class _ScheduledTasksState extends State<ScheduledTasks> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Schedule: ${task.cron}',
+                          'Schedule: ${task.title}',
                           style: TextStyle(fontSize: 13),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          getText(describeCron(task.cron)),
-                          style: const TextStyle(
-                            fontStyle: FontStyle.italic,
-                            fontSize: 13,
-                          ),
                         ),
                       ],
                     ),
@@ -132,13 +108,13 @@ class _ScheduledTasksState extends State<ScheduledTasks> {
                       children: [
                         Text(
                           DateFormat('MMM dd').format(
-                            task.lastScheduledAt ?? DateTime.now(),
+                            task.scheduledAt ?? DateTime.now(),
                           ), // Jan 17 Time
                         ),
                         const SizedBox(height: 4),
                         Text(
                           DateFormat('hh:mm a').format(
-                            task.lastScheduledAt ?? DateTime.now(),
+                            task.scheduledAt ?? DateTime.now(),
                           ), // Jan 17 Time
                         ),
                       ],

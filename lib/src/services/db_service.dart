@@ -5,7 +5,7 @@ class DbService {
 
   Future<void> createDatabase() async {
     db = await openDatabase(
-      'cron_clock.db',
+      'zeno.db',
       version: 1,
       onCreate: (Database db, int version) async {
         await db.execute('''

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../features/cron/cron_clock.dart';
+import 'package:zeno/src/features/tasks/home.dart';
 import '../features/splash/splash_screen.dart';
 import 'routes.dart';
 
@@ -11,8 +10,8 @@ class RouteGenerator {
     switch (settings.name) {
       case Routes.init:
         return Page(const SplashScreen());
-      case Routes.cronClock:
-        return Page(const CronClock());
+      case Routes.tasks:
+        return Page(const Home());
       default:
         return Page(const SplashScreen());
     }

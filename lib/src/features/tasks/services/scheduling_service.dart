@@ -6,7 +6,7 @@ import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import '../../../services/android_alarm_service.dart';
 import '../../../services/notification_service.dart';
 import '../../../utils/cron_converter.dart';
-import '../models/scheduled_task.dart';
+import '../models/task.dart';
 import 'schedule_task_service.dart';
 
 class SchedulingService {
@@ -14,22 +14,22 @@ class SchedulingService {
     final scheduledTask = await ScheduledTaskService.getTaskById(id.toString());
     if (scheduledTask != null) {
       var next = DateTime.now();
-      if (scheduledTask.lastScheduledAt == null) {
+      if (scheduledTask.scheduledAt == null) {
         next =
-            scheduledTask.lastScheduledAt ??
+            scheduledTask.scheduledAt ??
             CronUtils.computeNextRun(scheduledTask.cron) ??
             DateTime.now();
-        scheduledTask.lastScheduledAt = next;
+        scheduledTask.scheduledAt = next;
         await ScheduledTaskService.updateTaskById(scheduledTask);
       } else {
-        next = scheduledTask.lastScheduledAt ?? DateTime.now();
+        next = scheduledTask.scheduledAt ?? DateTime.now();
       }
       next = next.toUtc().toLocal();
       await listen(scheduledTask, next);
     }
   }
 
-  Future<void> listen(ScheduledTask scheduledTask, DateTime next) async {
+  Future<void> listen(Task scheduledTask, DateTime next) async {
     await AndroidAlarmManager.oneShotAt(
       next,
       int.tryParse(scheduledTask.id) ?? 0,

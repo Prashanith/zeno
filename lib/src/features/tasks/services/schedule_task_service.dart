@@ -2,10 +2,10 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../../services/db_service.dart';
 import '../../../services/init_services.dart';
-import '../models/scheduled_task.dart';
+import '../models/task.dart';
 
 class ScheduledTaskService {
-  static Future<int> createTask(ScheduledTask task) async {
+  static Future<int> createTask(Task task) async {
     var id = await locator<DbService>().db.insert(
       'cron',
       task.toMap(),
@@ -14,22 +14,22 @@ class ScheduledTaskService {
     return id;
   }
 
-  static Future<List<ScheduledTask>> getAllTasks() async {
+  static Future<List<Task>> getAllTasks() async {
     final List<Map<String, dynamic>> result = await locator<DbService>().db
         .query('cron', orderBy: 'id');
 
-    return result.map((e) => ScheduledTask.fromMap(e)).toList();
+    return result.map((e) => Task.fromMap(e)).toList();
   }
 
-  static Future<ScheduledTask?> getTaskById(String id) async {
+  static Future<Task?> getTaskById(String id) async {
     final List<Map<String, dynamic>> result = await locator<DbService>().db
         .query('cron', where: 'id = ?', whereArgs: [id], limit: 1);
 
     if (result.isEmpty) return null;
-    return ScheduledTask.fromMap(result.first);
+    return Task.fromMap(result.first);
   }
 
-  static Future<int> updateTaskById(ScheduledTask task) async {
+  static Future<int> updateTaskById(Task task) async {
     return await locator<DbService>().db.update(
       'cron',
       task.toMap(),

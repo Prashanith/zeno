@@ -13,7 +13,7 @@ class SplashScreen extends StatelessWidget {
     final router = locator<RouteGenerator>();
     Future.delayed(
       Duration(milliseconds: 1500),
-      () => router.navigator.currentState?.pushNamed(Routes.cronClock),
+      () => router.navigator.currentState?.pushNamed(Routes.tasks),
     );
   }
 
@@ -27,8 +27,8 @@ class SplashScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Logo(),
-            Text('Cron Clock', style: TextStyle(fontSize: 16)),
-            Text("The Nerd's Clock", style: TextStyle(fontSize: 10)),
+            Text('Zeno', style: TextStyle(fontSize: 16)),
+            Text('Run Quicker Now', style: TextStyle(fontSize: 10)),
           ],
         ),
       ),

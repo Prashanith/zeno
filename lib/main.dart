@@ -12,16 +12,16 @@ void main() async {
   var location = tz.getLocation('Asia/Kolkata');
   tz.setLocalLocation(location);
   await ServiceInitializer.initializeServices();
-  runApp(const CronClock());
+  runApp(const Zeno());
 }
 
-class CronClock extends StatelessWidget {
-  const CronClock({super.key});
+class Zeno extends StatelessWidget {
+  const Zeno({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Cron Clock',
+      title: 'Zeno',
       initialRoute: Routes.init,
       navigatorKey: locator.get<RouteGenerator>().navigator,
       onGenerateRoute: RouteGenerator.generateRoute,
@@ -33,14 +33,10 @@ class CronClock extends StatelessWidget {
               seedColor: const Color(0xFF1A73E8),
               brightness: Brightness.dark,
               surface: const Color(0xFF0D1117),
-              surfaceContainer: const Color(
-                0xFF161B22,
-              ),
+              surfaceContainer: const Color(0xFF161B22),
               onSurface: const Color(0xFFC9D1D9),
             ).copyWith(
-              primary: const Color(
-                0xFF58A6FF,
-              ),
+              primary: const Color(0xFF58A6FF),
               secondary: const Color(0xFF79C0FF),
             ),
         scaffoldBackgroundColor: const Color(0xFF0D1117),

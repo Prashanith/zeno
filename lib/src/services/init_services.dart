@@ -5,7 +5,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../features/cron/services/scheduling_service.dart';
+import '../features/tasks/services/scheduling_service.dart';
 import '../navigation/route_generator.dart';
 import 'android_alarm_service.dart';
 import 'db_service.dart';

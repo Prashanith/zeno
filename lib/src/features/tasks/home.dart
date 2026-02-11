@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 
 import '../bottom_nav_scaffold.dart';
 
-class CronClock extends StatefulWidget {
-  const CronClock({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<CronClock> createState() => _CronClockState();
+  State<Home> createState() => _HomeState();
 }
 
-class _CronClockState extends State<CronClock> {
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return const BottomNavScaffold();

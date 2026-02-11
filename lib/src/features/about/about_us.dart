@@ -15,7 +15,7 @@ class AboutUs extends StatelessWidget {
           Logo(),
           const SizedBox(height: 16),
           const Text(
-            'Cron Clock',
+            'Zeno',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
@@ -25,7 +25,7 @@ class AboutUs extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           const Text(
-            'Cron Clock is for the nerds who want to schedule tasks using the cron expression.\n'
+            'Zeno is a productivity app.\n'
             'For more such apps checkout DEV007.',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 16),

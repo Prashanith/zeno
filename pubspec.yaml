@@ -1,5 +1,5 @@
-name: cron_clock
-description: "A Cron Clock."
+name: zeno
+description: "A Productivity Application"
 publish_to: 'none'
 version: 1.0.0+1
 

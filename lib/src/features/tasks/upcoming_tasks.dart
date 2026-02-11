@@ -2,34 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../../services/init_services.dart';
 import '../../services/notification_service.dart';
-import '../../utils/cron_summary.dart';
 import 'package:intl/intl.dart';
 
-class UpcomingSchedules extends StatefulWidget {
-  const UpcomingSchedules({super.key});
+class UpcomingTasks extends StatefulWidget {
+  const UpcomingTasks({super.key});
 
   @override
-  State<UpcomingSchedules> createState() => _UpcomingSchedulesState();
+  State<UpcomingTasks> createState() => _UpcomingTasksState();
 }
 
-class _UpcomingSchedulesState extends State<UpcomingSchedules> {
+class _UpcomingTasksState extends State<UpcomingTasks> {
   late List<PendingNotificationRequest> scheduledTasks = [];
   Future<List<PendingNotificationRequest>> _future = Future.delayed(
     Duration(seconds: 0),
     () => [],
   );
-
-  String getText(CronDescriptionResult? result) {
-    if (result != null) {
-      if (result.errorMessage != null) {
-        return result.errorMessage!;
-      }
-      if (result.outputMessage != null) {
-        return result.outputMessage!;
-      }
-    }
-    return '';
-  }
 
   Future<List<PendingNotificationRequest>> fetchData() async {
     var list = await locator<NotificationService>().getAll();
