@@ -7,7 +7,6 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../features/tasks/services/scheduling_service.dart';
 import '../navigation/route_generator.dart';
-import 'android_alarm_service.dart';
 import 'db_service.dart';
 import 'local_storage.dart';
 import 'notification_service.dart';
@@ -46,7 +45,6 @@ class ServiceInitializer {
       Permission.notification,
     );
 
-    await AndroidAlarmService.init();
     await NotificationService.instance.init();
   }
 }
